@@ -1,6 +1,5 @@
 package com.dimatsoft.codingchallenge.domain.repository
 
-import android.util.Log
 import com.dimatsoft.codingchallenge.data.api.FlickrApi
 import com.dimatsoft.codingchallenge.data.mapper.SearchModelResponseToSearchResultMapper
 import com.dimatsoft.codingchallenge.domain.model.SearchResult
@@ -12,7 +11,8 @@ class LocalRepositoryImpl @Inject constructor(
 ) : LocalRepository {
 
     override suspend fun getFlickObjects(searchText: String): List<SearchResult> {
-        Log.e("Logs", "OK! $flickrApi")
-        return flickrApi.getImages().photos.photo.map(searchModelResponseToSearchResultMapper)
+        return flickrApi.getImages(searchText, page = 2).photos.photo.map(
+            searchModelResponseToSearchResultMapper
+        )
     }
 }

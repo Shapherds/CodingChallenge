@@ -1,6 +1,5 @@
 package com.dimatsoft.codingchallenge.presentation.ui.fragment.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
