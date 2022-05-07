@@ -4,7 +4,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.dimatsoft.codingchallenge.data.source.PhotoSource
-import com.dimatsoft.codingchallenge.data.source.PhotoSource.Companion.LIMIT
 import com.dimatsoft.codingchallenge.domain.model.SearchResult
 import com.dimatsoft.codingchallenge.domain.repository.LocalRepository
 import kotlinx.coroutines.flow.Flow

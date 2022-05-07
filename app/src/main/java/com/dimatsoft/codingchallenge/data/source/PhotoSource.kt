@@ -1,6 +1,5 @@
 package com.dimatsoft.codingchallenge.data.source
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.dimatsoft.codingchallenge.domain.model.SearchResult
@@ -27,8 +26,7 @@ class PhotoSource(
         return state.anchorPosition
     }
 
-    companion object {
-        const val LIMIT = 6
-        private const val INITIAL_PAGE = 1
+    private companion object {
+        const val INITIAL_PAGE = 1
     }
 }
