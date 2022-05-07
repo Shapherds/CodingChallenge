@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Coding Challenge</string>
+
+    <!-- Image Search -->
+    <string name="tab_search_results">Search Results</string>
+    <string name="tab_search_history">History</string>
 </resources>

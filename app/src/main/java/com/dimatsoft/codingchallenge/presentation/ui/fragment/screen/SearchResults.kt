@@ -12,7 +12,7 @@ import com.dimatsoft.codingchallenge.presentation.ui.fragment.SearchViewModel
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-internal fun SearchScreen(viewModel: SearchViewModel) {
+fun SearchResults(viewModel: SearchViewModel) {
 
     val res = viewModel.showLoadingFlow.collectAsLazyPagingItems()
 
