@@ -1,6 +1,5 @@
 package com.dimatsoft.codingchallenge.presentation.ui.fragment.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,12 +22,19 @@ internal fun SearchScreen(viewModel: SearchViewModel) {
         LazyColumn {
             items(res.itemCount) { item ->
                 res[item]?.let { photoUrl ->
-                    GlideImage(
-                        imageModel = photoUrl,
-                        modifier = Modifier.fillMaxWidth().height(200.dp)
-                    )
+                    DrawImage(photoUrl)
                 }
             }
         }
     }
+}
+
+@Composable
+fun DrawImage(photoUrl: String) {
+    GlideImage(
+        imageModel = photoUrl,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+    )
 }
