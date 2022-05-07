@@ -10,8 +10,8 @@ class LocalRepositoryImpl @Inject constructor(
     private val searchModelResponseToSearchResultMapper: SearchModelResponseToSearchResultMapper
 ) : LocalRepository {
 
-    override suspend fun getFlickObjects(searchText: String): List<SearchResult> {
-        return flickrApi.getImages(searchText, page = 2).photos.photo.map(
+    override suspend fun getFlickObjects(searchText: String, page: Int): List<SearchResult> {
+        return flickrApi.getImages(searchText, page).photos.photo.map(
             searchModelResponseToSearchResultMapper
         )
     }
