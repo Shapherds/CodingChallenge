@@ -1,20 +1,30 @@
 package com.dimatsoft.codingchallenge.presentation.ui.fragment.screen
 
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.*
 import com.dimatsoft.codingchallenge.R
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.SearchViewModel
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.model.Tab
 
 @Composable
 fun ImageSearchScreen(viewModel: SearchViewModel) {
-    TitleTabRow(
-        tabs = listOf(
-            Tab(R.string.tab_search_history) {
-                SearchHistory(viewModel = viewModel)
-            },
-            Tab(R.string.tab_search_results) {
-                SearchResults(viewModel = viewModel)
-            },
+    Column {
+        var selectedTabIndex by remember { mutableStateOf(0) }
+        SearchView(onSearch = {
+            viewModel.getSource(it)
+            selectedTabIndex = 1
+        })
+        TitleTabRow(
+            tabs = listOf(
+                Tab(R.string.tab_search_history) {
+                    SearchHistory(viewModel = viewModel)
+                },
+                Tab(R.string.tab_search_results) {
+                    SearchResults(viewModel = viewModel)
+                },
+            ),
+            onTabSelected = { index -> selectedTabIndex = index },
+            selectedTabIndex
         )
-    )
+    }
 }

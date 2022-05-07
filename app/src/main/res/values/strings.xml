@@ -4,4 +4,7 @@
     <!-- Image Search -->
     <string name="tab_search_results">Search Results</string>
     <string name="tab_search_history">History</string>
+
+    <!-- Image Search - testing, accessibility -->
+    <string name="description_search_icon">Search</string>
 </resources>

@@ -16,8 +16,6 @@ fun SearchResults(viewModel: SearchViewModel) {
 
     val res = viewModel.showLoadingFlow.collectAsLazyPagingItems()
 
-    viewModel.getSource("Berlin")
-
     Column {
         LazyColumn {
             items(res.itemCount) { item ->
