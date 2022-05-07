@@ -22,9 +22,9 @@ internal fun SearchScreen(viewModel: SearchViewModel) {
     Column {
         LazyColumn {
             items(res.itemCount) { item ->
-                res[item]?.let { photo ->
+                res[item]?.let { photoUrl ->
                     GlideImage(
-                        imageModel = viewModel.createUrl(photo),
+                        imageModel = photoUrl,
                         modifier = Modifier.fillMaxWidth().height(200.dp)
                     )
                 }

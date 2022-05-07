@@ -2,15 +2,14 @@ package com.dimatsoft.codingchallenge.data.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.dimatsoft.codingchallenge.domain.model.SearchResult
 import com.dimatsoft.codingchallenge.domain.repository.LocalRepository
 
 class PhotoSource(
     private val localRepository: LocalRepository,
     private val searchText: String
-) : PagingSource<Int, SearchResult>() {
+) : PagingSource<Int, String>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchResult> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, String> {
         val nextPage = params.key ?: INITIAL_PAGE
 
         val response =
@@ -22,7 +21,7 @@ class PhotoSource(
         )
     }
 
-    override fun getRefreshKey(state: PagingState<Int, SearchResult>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, String>): Int? {
         return state.anchorPosition
     }
 

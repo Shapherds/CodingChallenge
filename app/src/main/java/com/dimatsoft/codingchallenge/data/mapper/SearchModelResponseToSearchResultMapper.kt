@@ -1,18 +1,15 @@
 package com.dimatsoft.codingchallenge.data.mapper
 
 import com.dimatsoft.codingchallenge.data.model.PhotoResponse
-import com.dimatsoft.codingchallenge.domain.model.SearchResult
 import javax.inject.Inject
 
 class SearchModelResponseToSearchResultMapper @Inject constructor() :
-        (PhotoResponse) -> SearchResult {
+        (PhotoResponse) -> String {
 
-    override fun invoke(response: PhotoResponse): SearchResult {
-        return SearchResult(
-            id = response.id,
-            secret = response.secret,
-            server = response.server,
-            farm = response.farm
-        )
+    override fun invoke(response: PhotoResponse): String {
+        return createUrl(response)
     }
+
+    private fun createUrl(searchResult: PhotoResponse): String =
+        "https://farm${searchResult.farm}.static.flickr.com/${searchResult.server}/${searchResult.id}_${searchResult.secret}.jpg"
 }
