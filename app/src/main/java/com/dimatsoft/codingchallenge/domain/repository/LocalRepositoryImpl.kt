@@ -16,11 +16,10 @@ class LocalRepositoryImpl @Inject constructor(
     private val dataBaseProvider: DataBaseProvider
 ) : LocalRepository {
 
-    override suspend fun getFlickObjects(searchText: String, page: Int): List<String> {
-        return flickrApi.getImages(searchText, page).photos.photo.map(
+    override suspend fun getFlickObjects(searchText: String, page: Int): List<String> =
+        flickrApi.getImages(searchText, page).photos.photo.map(
             searchModelResponseToSearchResultMapper
         )
-    }
 
     override suspend fun saveHistoryItem(historyItem: HistoryItem) =
         dataBaseProvider.saveToHistory(historyItemToHistoryItemLocalMapper(historyItem))

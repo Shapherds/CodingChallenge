@@ -13,12 +13,25 @@ class SearchViewModelImpl @Inject constructor(
     private val searchPlaceUseCase: SearchPlaceUseCase
 ) : SearchViewModel() {
 
-    override val showLoadingFlow = MutableStateFlow<PagingData<String>>(PagingData.empty())
+    override val photoUriFlow = MutableStateFlow<PagingData<String>>(PagingData.empty())
+
+    private val lastSearch = MutableStateFlow("")
 
     override fun getSource(searchText: String) {
         viewModelScope.launch {
+            lastSearch.emit(searchText)
             searchPlaceUseCase(searchText).cachedIn(this).collect { data ->
-                showLoadingFlow.emit(data)
+                photoUriFlow.emit(data)
+            }
+        }
+    }
+
+    override fun retry() {
+        if (lastSearch.value.isNotBlank()) {
+            viewModelScope.launch {
+                searchPlaceUseCase(lastSearch.value).cachedIn(this).collect { data ->
+                    photoUriFlow.emit(data)
+                }
             }
         }
     }

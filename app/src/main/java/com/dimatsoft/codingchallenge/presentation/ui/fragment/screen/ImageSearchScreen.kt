@@ -5,6 +5,9 @@ import androidx.compose.runtime.*
 import com.dimatsoft.codingchallenge.R
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.SearchViewModel
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.model.Tab
+import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.SearchHistory
+import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.SearchResults
+import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.TitleTabRow
 
 @Composable
 fun ImageSearchScreen(viewModel: SearchViewModel) {

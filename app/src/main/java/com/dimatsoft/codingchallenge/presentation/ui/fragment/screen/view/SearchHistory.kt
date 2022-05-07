@@ -1,4 +1,4 @@
-package com.dimatsoft.codingchallenge.presentation.ui.fragment.screen
+package com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

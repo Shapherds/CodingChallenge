@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 
 abstract class SearchViewModel : ViewModel() {
 
-    abstract val showLoadingFlow: StateFlow<PagingData<String>>
+    abstract val photoUriFlow: StateFlow<PagingData<String>>
 
     abstract fun getSource(searchText: String)
+
+    abstract fun retry()
 }

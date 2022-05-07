@@ -4,6 +4,8 @@
     <!-- Image Search -->
     <string name="tab_search_results">Search Results</string>
     <string name="tab_search_history">History</string>
+    <string name="default_err_mess">Something went wrong</string>
+    <string name="retry">Retry</string>
 
     <!-- Image Search - testing, accessibility -->
     <string name="description_search_icon">Search</string>
