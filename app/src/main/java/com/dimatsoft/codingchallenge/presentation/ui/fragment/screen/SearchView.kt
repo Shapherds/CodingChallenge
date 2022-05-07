@@ -25,21 +25,22 @@ import com.dimatsoft.codingchallenge.R
  */
 @Composable
 fun SearchView(
-    onSearch: (String) -> Unit
+    onTextChanged: (String) -> Unit,
+    onSearch: () -> Unit,
+    onClear: () -> Unit,
+    initialText: String = "",
 ) {
     var searchSelected by remember { mutableStateOf(false) }
-    var searchText by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
 
-    TopAppBar(modifier =
-    Modifier.height(52.dp)) {
+    TopAppBar(modifier = Modifier.height(52.dp)) {
         IconButton(onClick = {
             searchSelected = !searchSelected
             if (searchSelected) {
                 focusRequester.requestFocus()
             } else {
-                searchText = ""
+                onClear()
                 focusManager.clearFocus()
             }
         }) {
@@ -49,7 +50,7 @@ fun SearchView(
             )
         }
         OutlinedTextField(
-            value = searchText, onValueChange = { value -> searchText = value },
+            value = initialText, onValueChange = { value -> onTextChanged(value) },
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester)
@@ -64,7 +65,7 @@ fun SearchView(
             singleLine = true,
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = {
-                onSearch(searchText)
+                onSearch()
                 focusManager.clearFocus()
                 searchSelected = false
             })

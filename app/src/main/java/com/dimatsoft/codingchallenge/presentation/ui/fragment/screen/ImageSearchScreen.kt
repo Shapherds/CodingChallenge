@@ -13,16 +13,27 @@ import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.TitleT
 fun ImageSearchScreen(viewModel: SearchViewModel) {
     Column {
         var selectedTabIndex by remember { mutableStateOf(0) }
-        SearchView(onSearch = {
-            viewModel.getSource(it)
-            selectedTabIndex = 1
-        })
+        var searchText by remember { mutableStateOf("") }
+
+        SearchView(
+            onTextChanged = { text ->
+                searchText = text
+            },
+            onSearch = {
+                viewModel.getSource(searchText)
+                selectedTabIndex = 1
+            },
+            onClear = {
+                searchText = ""
+            }, searchText
+        )
         TitleTabRow(
             tabs = listOf(
                 Tab(R.string.tab_search_history) {
                     SearchHistory(
                         viewModel = viewModel,
                         onHistorySelected = {
+                            searchText = it
                             viewModel.getSource(it)
                             selectedTabIndex = 1
                         }
