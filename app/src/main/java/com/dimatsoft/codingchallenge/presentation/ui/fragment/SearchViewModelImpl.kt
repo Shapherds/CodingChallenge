@@ -18,4 +18,7 @@ class SearchViewModelImpl @Inject constructor(
             showLoadingFlow.emit(searchPlaceUseCase(searchText))
         }
     }
+
+    override fun createUrl(searchResult: SearchResult): String =
+        "https://farm${searchResult.farm}.static.flickr.com/${searchResult.server}/${searchResult.id}_${searchResult.secret}.jpg"
 }
