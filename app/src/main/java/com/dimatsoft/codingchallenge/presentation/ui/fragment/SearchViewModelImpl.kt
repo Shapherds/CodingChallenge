@@ -3,7 +3,7 @@ package com.dimatsoft.codingchallenge.presentation.ui.fragment
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.dimatsoft.codingchallenge.domain.usecase.SearchPlaceUseCase
+import com.dimatsoft.codingchallenge.domain.usecase.search.SearchPlaceUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

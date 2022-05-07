@@ -2,8 +2,10 @@ package com.dimatsoft.codingchallenge.di
 
 import android.content.Context
 import com.dimatsoft.codingchallenge.base.App
+import com.dimatsoft.codingchallenge.di.module.DatabaseModule
 import com.dimatsoft.codingchallenge.di.module.FragmentModule
 import com.dimatsoft.codingchallenge.di.module.NetworkModule
+import com.dimatsoft.codingchallenge.di.module.ProviderModule
 import com.dimatsoft.codingchallenge.di.module.RepositoryModule
 import com.dimatsoft.codingchallenge.di.module.UseCaseModule
 import com.dimatsoft.codingchallenge.di.module.ViewModelModule
@@ -21,6 +23,8 @@ import dagger.android.DaggerApplication
         UseCaseModule::class,
         FragmentModule::class,
         ViewModelModule::class,
+        DatabaseModule::class,
+        ProviderModule::class,
         AndroidInjectionModule::class
     ]
 )

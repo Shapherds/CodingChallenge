@@ -1,4 +1,4 @@
-package com.dimatsoft.codingchallenge.domain.usecase
+package com.dimatsoft.codingchallenge.domain.usecase.search
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
