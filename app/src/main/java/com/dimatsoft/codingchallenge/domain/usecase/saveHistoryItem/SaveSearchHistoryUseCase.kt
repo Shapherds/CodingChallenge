@@ -2,7 +2,7 @@ package com.dimatsoft.codingchallenge.domain.usecase.saveHistoryItem
 
 import com.dimatsoft.codingchallenge.domain.model.HistoryItem
 
-interface SaveHistoryItemUseCase {
+interface SaveSearchHistoryUseCase {
 
-    suspend operator fun invoke(historyItem: HistoryItem )
+    suspend operator fun invoke(text: String)
 }

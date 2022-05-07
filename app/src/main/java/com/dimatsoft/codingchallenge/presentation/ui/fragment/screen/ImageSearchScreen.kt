@@ -20,7 +20,13 @@ fun ImageSearchScreen(viewModel: SearchViewModel) {
         TitleTabRow(
             tabs = listOf(
                 Tab(R.string.tab_search_history) {
-                    SearchHistory(viewModel = viewModel)
+                    SearchHistory(
+                        viewModel = viewModel,
+                        onHistorySelected = {
+                            viewModel.getSource(it)
+                            selectedTabIndex = 1
+                        }
+                    )
                 },
                 Tab(R.string.tab_search_results) {
                     SearchResults(viewModel = viewModel)

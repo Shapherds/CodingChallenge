@@ -6,6 +6,8 @@ import com.dimatsoft.codingchallenge.data.mapper.HistoryItemLocalToHistoryItemMa
 import com.dimatsoft.codingchallenge.data.mapper.HistoryItemToHistoryItemLocalMapper
 import com.dimatsoft.codingchallenge.data.mapper.SearchModelResponseToSearchResultMapper
 import com.dimatsoft.codingchallenge.domain.model.HistoryItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LocalRepositoryImpl @Inject constructor(
@@ -21,9 +23,11 @@ class LocalRepositoryImpl @Inject constructor(
             searchModelResponseToSearchResultMapper
         )
 
-    override suspend fun saveHistoryItem(historyItem: HistoryItem) =
+    override suspend fun saveHistoryItem(historyItem: HistoryItem) = withContext(Dispatchers.IO) {
         dataBaseProvider.saveToHistory(historyItemToHistoryItemLocalMapper(historyItem))
+    }
 
-    override suspend fun getHistory(): List<HistoryItem> =
+    override suspend fun getHistory(): List<HistoryItem> = withContext(Dispatchers.IO) {
         dataBaseProvider.getHistory().map(historyItemLocalToHistoryItemMapper)
+    }
 }

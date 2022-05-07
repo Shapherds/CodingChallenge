@@ -4,9 +4,12 @@ import com.dimatsoft.codingchallenge.domain.model.HistoryItem
 import com.dimatsoft.codingchallenge.domain.repository.LocalRepository
 import javax.inject.Inject
 
-class SaveHistoryItemUseCaseImpl @Inject constructor(
+class SaveSearchHistoryUseCaseImpl @Inject constructor(
     private val localRepository: LocalRepository
-) : SaveHistoryItemUseCase {
+) : SaveSearchHistoryUseCase {
 
-    override suspend operator fun invoke(historyItem: HistoryItem) = localRepository.saveHistoryItem(historyItem)
+    override suspend operator fun invoke(text: String) {
+        val timeNow = System.currentTimeMillis()
+        localRepository.saveHistoryItem(HistoryItem(timeNow, text))
+    }
 }

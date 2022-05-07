@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -31,7 +32,8 @@ fun SearchView(
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
 
-    TopAppBar(modifier = Modifier.height(52.dp)) {
+    TopAppBar(modifier =
+    Modifier.height(52.dp)) {
         IconButton(onClick = {
             searchSelected = !searchSelected
             if (searchSelected) {
@@ -50,7 +52,8 @@ fun SearchView(
             value = searchText, onValueChange = { value -> searchText = value },
             modifier = Modifier
                 .fillMaxWidth()
-                .focusRequester(focusRequester),
+                .focusRequester(focusRequester)
+                .onFocusChanged { state -> searchSelected = state.isFocused },
             colors = TextFieldDefaults.textFieldColors(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,

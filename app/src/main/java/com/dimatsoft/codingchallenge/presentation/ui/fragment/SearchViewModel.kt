@@ -8,6 +8,8 @@ abstract class SearchViewModel : ViewModel() {
 
     abstract val photoUriFlow: StateFlow<PagingData<String>>
 
+    abstract val searchHistory: StateFlow<List<String>>
+
     abstract fun getSource(searchText: String)
 
     abstract fun retry()
