@@ -1,12 +1,17 @@
 package com.dimatsoft.codingchallenge.presentation.ui.fragment.screen
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.dimatsoft.codingchallenge.R
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.SearchViewModel
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.model.Tab
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.SearchHistory
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.SearchResults
+import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.SearchView
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.TitleTabRow
 
 @Composable
