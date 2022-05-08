@@ -35,7 +35,12 @@ class SearchFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 ChallengeTheme{
-                    ImageSearchScreen(viewModel)
+                    ImageSearchScreen(
+                        viewModel.photoUriFlow,
+                        viewModel.searchHistory,
+                        viewModel::getSource,
+                        viewModel::retry
+                    )
                 }
             }
         }

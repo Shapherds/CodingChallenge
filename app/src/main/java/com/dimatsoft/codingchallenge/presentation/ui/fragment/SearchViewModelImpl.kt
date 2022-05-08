@@ -20,9 +20,9 @@ class SearchViewModelImpl @Inject constructor(
 
     override val photoUriFlow = MutableStateFlow<PagingData<String>>(PagingData.empty())
 
-    private val lastSearch = MutableStateFlow("")
-
     override val searchHistory = MutableStateFlow<List<String>>(emptyList())
+
+    private val lastSearch = MutableStateFlow("")
 
     init {
         viewModelScope.launch(Dispatchers.Default) {

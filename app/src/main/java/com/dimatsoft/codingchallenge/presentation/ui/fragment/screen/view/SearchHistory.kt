@@ -13,7 +13,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,13 +21,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dimatsoft.codingchallenge.R
-import com.dimatsoft.codingchallenge.presentation.ui.fragment.SearchViewModel
 
 @Composable
-fun SearchHistory(viewModel: SearchViewModel, onHistorySelected: (String) -> Unit) {
-    val history = viewModel.searchHistory.collectAsState()
-
-    history.value.also {
+fun SearchHistory(
+    historyRes: List<String>,
+    onHistorySelected: (String) -> Unit
+) {
+    historyRes.also {
         if (it.isEmpty()) {
             EmptyHistory()
         } else {

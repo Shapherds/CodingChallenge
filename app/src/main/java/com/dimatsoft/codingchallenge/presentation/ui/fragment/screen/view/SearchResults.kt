@@ -10,27 +10,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.dimatsoft.codingchallenge.R
-import com.dimatsoft.codingchallenge.presentation.ui.fragment.SearchViewModel
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.dialogs.ErrorDialog
 import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.view.dialogs.LoadingDialog
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-fun SearchResults(viewModel: SearchViewModel) {
+fun SearchResults(res: LazyPagingItems<String>, retryRequest: () -> Unit) {
 
-    val res: LazyPagingItems<String> = viewModel.photoUriFlow.collectAsLazyPagingItems()
+//    val res: LazyPagingItems<String> = viewModel.photoUriFlow.collectAsLazyPagingItems()
 
     when (res.loadState.refresh) {
         is LoadState.Loading -> {
             LoadingDialog()
         }
         is LoadState.Error -> {
-            ErrorDialog(onDismiss = {viewModel.retry()})
+            ErrorDialog(onDismiss = { retryRequest() })
         }
     }
     LazyColumn {
@@ -50,7 +50,8 @@ fun DrawImage(photoUrl: String) {
             .fillMaxWidth()
             .height(200.dp)
             .padding(16.dp)
-            .border(2.dp, Color.Blue),
+            .border(2.dp, Color.Blue)
+            .semantics { contentDescription = photoUrl },
         placeHolder = ImageBitmap.imageResource(R.drawable.placeholder)
     )
 }
