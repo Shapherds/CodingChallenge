@@ -1,12 +1,16 @@
 package com.dimatsoft.codingchallenge.presentation.ui.fragment
 
 import androidx.lifecycle.ViewModel
-import com.dimatsoft.codingchallenge.domain.model.SearchResult
+import androidx.paging.PagingData
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class SearchViewModel : ViewModel() {
 
-    abstract val showLoadingFlow: StateFlow<List<SearchResult>>
+    abstract val photoUriFlow: StateFlow<PagingData<String>>
+
+    abstract val searchHistory: StateFlow<List<String>>
 
     abstract fun getSource(searchText: String)
+
+    abstract fun retry()
 }

@@ -1,25 +1,33 @@
 package com.dimatsoft.codingchallenge.domain.repository
 
 import com.dimatsoft.codingchallenge.data.api.FlickrApi
+import com.dimatsoft.codingchallenge.data.database.DataBaseProvider
+import com.dimatsoft.codingchallenge.data.mapper.HistoryItemLocalToHistoryItemMapper
+import com.dimatsoft.codingchallenge.data.mapper.HistoryItemToHistoryItemLocalMapper
 import com.dimatsoft.codingchallenge.data.mapper.SearchModelResponseToSearchResultMapper
-import com.dimatsoft.codingchallenge.data.model.SearchModelRequest
-import com.dimatsoft.codingchallenge.domain.model.SearchResult
+import com.dimatsoft.codingchallenge.domain.model.HistoryItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LocalRepositoryImpl @Inject constructor(
     private val flickrApi: FlickrApi,
-    private val searchModelResponseToSearchResultMapper: SearchModelResponseToSearchResultMapper
+    private val searchModelResponseToSearchResultMapper: SearchModelResponseToSearchResultMapper,
+    private val historyItemLocalToHistoryItemMapper: HistoryItemLocalToHistoryItemMapper,
+    private val historyItemToHistoryItemLocalMapper: HistoryItemToHistoryItemLocalMapper,
+    private val dataBaseProvider: DataBaseProvider
 ) : LocalRepository {
 
-    override suspend fun getFlickObjects(searchText: String): List<SearchResult> =
-        flickrApi.getImages(
-            SearchModelRequest(
-                method = "flickr.photos.search",
-                api_key = "37ad288835e4c64fc0cb8af3f3a1a65d",
-                format = "format",
-                nojsoncallback = 1,
-                safe_search = 1,
-                text = searchText
-            )
-        ).map(searchModelResponseToSearchResultMapper)
+    override suspend fun getFlickObjects(searchText: String, page: Int): List<String> =
+        flickrApi.getImages(searchText, page).photos.photo.map(
+            searchModelResponseToSearchResultMapper
+        )
+
+    override suspend fun saveHistoryItem(historyItem: HistoryItem) = withContext(Dispatchers.IO) {
+        dataBaseProvider.saveToHistory(historyItemToHistoryItemLocalMapper(historyItem))
+    }
+
+    override suspend fun getHistory(): List<HistoryItem> = withContext(Dispatchers.IO) {
+        dataBaseProvider.getHistory().map(historyItemLocalToHistoryItemMapper)
+    }
 }

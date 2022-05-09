@@ -9,8 +9,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.dimatsoft.codingchallenge.di.DaggerComponent
-import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.SearchScreen
+import com.dimatsoft.codingchallenge.presentation.ui.fragment.screen.ImageSearchScreen
 import com.dimatsoft.codingchallenge.ui.theme.ChallengeTheme
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -36,7 +35,12 @@ class SearchFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 ChallengeTheme{
-                    SearchScreen(viewModel)
+                    ImageSearchScreen(
+                        viewModel.photoUriFlow,
+                        viewModel.searchHistory,
+                        viewModel::getSource,
+                        viewModel::retry
+                    )
                 }
             }
         }
