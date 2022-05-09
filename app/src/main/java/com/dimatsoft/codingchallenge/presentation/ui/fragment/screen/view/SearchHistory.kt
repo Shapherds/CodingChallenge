@@ -34,7 +34,6 @@ fun SearchHistory(
             HistoryRecords(it, onHistorySelected)
         }
     }
-
 }
 
 @Composable
